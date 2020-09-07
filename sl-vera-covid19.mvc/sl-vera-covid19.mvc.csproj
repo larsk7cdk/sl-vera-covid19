@@ -5,4 +5,8 @@
     <RootNamespace>sl_vera_covid19.mvc</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Domains\DomainModels\" />
+  </ItemGroup>
+
 </Project>
