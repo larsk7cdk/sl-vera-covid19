@@ -1,13 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using sl_vera_covid19.mvc.Models;
+using sl_vera_covid19.mvc.Persistance.Core;
 
 namespace sl_vera_covid19.mvc
 {
@@ -24,6 +23,10 @@ namespace sl_vera_covid19.mvc
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddSingleton(
+                InitializeCosmosClientInstanceAsync<CovidRegistration>(Configuration.GetSection("CosmosDb"))
+                    .GetAwaiter().GetResult());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,6 +42,7 @@ namespace sl_vera_covid19.mvc
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -49,9 +53,25 @@ namespace sl_vera_covid19.mvc
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    "default",
+                    "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        private static async Task<ICosmosDbService<T>> InitializeCosmosClientInstanceAsync<T>(IConfigurationSection configurationSection)
+        {
+            var databaseName = configurationSection.GetSection("DatabaseName").Value;
+            var containerName = configurationSection.GetSection("ContainerName").Value;
+            var account = configurationSection.GetSection("Account").Value;
+            var key = configurationSection.GetSection("Key").Value;
+            var client = new CosmosClient(account, key);
+
+            var cosmosDbService = new CosmosDbService<T>(client, databaseName, containerName);
+            var database = await client.CreateDatabaseIfNotExistsAsync(databaseName);
+
+            await database.Database.CreateContainerIfNotExistsAsync(containerName, "/id");
+
+            return cosmosDbService;
         }
     }
 }

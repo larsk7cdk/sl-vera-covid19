@@ -1,4 +1,4 @@
-namespace sl_vera_covid19.mvc.ViewModels
+namespace sl_vera_covid19.mvc.Models
 {
     public class ErrorViewModel
     {

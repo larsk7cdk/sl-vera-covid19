@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using sl_vera_covid19.mvc.ViewModels;
+using sl_vera_covid19.mvc.Models;
 
 namespace sl_vera_covid19.mvc.Controllers
 {
