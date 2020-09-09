@@ -1,31 +1,41 @@
-﻿@model sl_vera_covid19.mvc.Models.CovidRegistration
+﻿@model sl_vera_covid19.mvc.ViewModels.CovidRegistrationViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Covid19";
 }
 
-<h1>Details</h1>
+<h1>Detaljer</h1>
 
 <div>
-    <h4>CovidRegistration</h4>
-    <hr />
+    <hr/>
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cpr)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cpr)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FirstName)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FirstName)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RegistrationDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RegistrationDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Result)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Result)
         </dd>
     </dl>
 </div>
 <div>
-
-    @Html.ActionLink("Edit", "Edit", new {id = Model.Id}) |
-    <a asp-action="Index">Back to List</a>
+    @Html.ActionLink("Rediger", "Edit", new {id = Model.Id}, new {@class = "btn btn-warning"})
+    <a asp-action="Index">Tilbage til liste</a>
 </div>

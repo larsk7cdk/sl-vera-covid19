@@ -25,7 +25,7 @@ namespace sl_vera_covid19.mvc
             services.AddControllersWithViews();
 
             services.AddSingleton(
-                InitializeCosmosClientInstanceAsync<CovidRegistration>(Configuration.GetSection("CosmosDb"))
+                InitializeCosmosClientInstanceAsync<CovidRegistrationModel>(Configuration.GetSection("CosmosDb"))
                     .GetAwaiter().GetResult());
         }
 
@@ -54,7 +54,7 @@ namespace sl_vera_covid19.mvc
             {
                 endpoints.MapControllerRoute(
                     "default",
-                    "{controller=Home}/{action=Index}/{id?}");
+                    "{controller=CovidRegistration}/{action=Index}/{id?}");
             });
         }
 

@@ -1,19 +1,47 @@
-﻿@model IEnumerable<sl_vera_covid19.mvc.Models.CovidRegistration>
+﻿@model IEnumerable<sl_vera_covid19.mvc.ViewModels.CovidRegistrationViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Covid19";
 }
 
-<h1>Index</h1>
+<style>
+    .interaction {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 25px;
+        max-width: 500px;
+    }
+</style>
+
+<h1>Covid19 Register</h1>
 
 <p>
-    <a asp-action="Create">Opret registreing</a>
+    <a asp-action="Create">Opret registrering</a>
 </p>
+
+<form asp-action="Index" method="get">
+    <section class="interaction">
+        <div class="input-group ">
+            <input type="text" class="form-control mr-2" name="SearchString" value="@ViewData["currentFilter"]" placeholder="Søg navn"/>
+            <button class="btn btn-outline-secondary" type="submit" value="Search">Opdater</button>
+        </div>
+    </section>
+</form>
+
 <table class="table">
     <thead>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.DisplayNameFor(model => model.Cpr)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RegistrationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Result)
         </th>
         <th></th>
     </tr>
@@ -23,13 +51,21 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
+                @Html.DisplayFor(modelItem => item.Cpr)
             </td>
             <td>
-
-                @Html.ActionLink("Details", "Details", new {id = item.Id}, new {@class = "btn btn-primary"}) |
-                @Html.ActionLink("Edit", "Edit", new {id = item.Id}, new {@class = "btn btn-warning"}) |
-                @Html.ActionLink("Delete", "Delete", new {id = item.Id}, new {@class = "btn btn-danger"})
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegistrationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Result)
+            </td>
+            <td>
+                @Html.ActionLink("Detaljer", "Details", new {id = item.Id}, new {@class = "btn btn-primary"}) |
+                @Html.ActionLink("Rediger", "Edit", new {id = item.Id}, new {@class = "btn btn-warning"}) |
+                @Html.ActionLink("Slet", "Delete", new {id = item.Id}, new {@class = "btn btn-danger"})
             </td>
         </tr>
     }
