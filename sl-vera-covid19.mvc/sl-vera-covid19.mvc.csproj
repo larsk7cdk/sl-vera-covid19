@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>sl_vera_covid19.mvc</RootNamespace>
+    <UserSecretsId>ba173b11-efbe-4f8c-909e-a48959edae35</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
