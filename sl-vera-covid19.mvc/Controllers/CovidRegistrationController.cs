@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using sl_vera_covid19.mvc.Models;
 using sl_vera_covid19.mvc.Persistance.Core;
@@ -8,6 +9,7 @@ using sl_vera_covid19.mvc.ViewModels;
 
 namespace sl_vera_covid19.mvc.Controllers
 {
+    [Authorize]
     public class CovidRegistrationController : Controller
     {
         private readonly ICosmosDbService<CovidRegistrationModel> _cosmosDbService;

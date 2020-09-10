@@ -5,6 +5,12 @@
       "type": "cosmosdb.azure",
       "connectionId": "CosmosDb",
       "secretStore": "AzureAppSettings"
+    },
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "DefaultConnection",
+      "suggestion": "true",
+      "ignored": "true"
     }
   }
 }
