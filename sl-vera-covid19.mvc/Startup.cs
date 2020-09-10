@@ -54,34 +54,34 @@ namespace sl_vera_covid19.mvc
                 app.UseHsts();
             }
 
-            //app.Use(async (context, next) =>
-            //{
-            //    context.Response.Headers.Add("X-Xss-Protection", "1");
-            //    context.Response.Headers.Add("X-Frame-Options", "DENY");
-            //    context.Response.Headers.Add("Referrer-Policy", "no-referrer");
-            //    context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
-            //    context.Response.Headers.Add(
-            //        "Content-Security-Policy",
-            //        "default-src 'self'; " +
-            //        "img-src 'self'; " +
-            //        "font-src 'self'; " +
-            //        //"style-src 'self'; " +
-            //        //"script-src 'self'; " +
-            //        "frame-src 'self';" +
-            //        "connect-src 'self';");
+            app.Use(async (context, next) =>
+            {
+                context.Response.Headers.Add("X-Xss-Protection", "1");
+                context.Response.Headers.Add("X-Frame-Options", "DENY");
+                context.Response.Headers.Add("Referrer-Policy", "no-referrer");
+                context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
+                //context.Response.Headers.Add(
+                //    "Content-Security-Policy",
+                //    "default-src 'self'; " +
+                //    "img-src 'self'; " +
+                //    "font-src 'self'; " +
+                //    "style-src 'self'; " +
+                //    "script-src 'self'; " +
+                //    "frame-src 'self';" +
+                //    "connect-src 'self';");
 
-            //    context.Response.Headers.Add(
-            //        "Feature-Policy",
-            //        "accelerometer 'none'; " +
-            //        "camera 'none'; " +
-            //        "geolocation 'self'; " +
-            //        "gyroscope 'none'; " +
-            //        "magnetometer 'none'; " +
-            //        "microphone 'none'; " +
-            //        "payment 'none';" +
-            //        "usb 'none'");
-            //    await next();
-            //});
+                //context.Response.Headers.Add(
+                //    "Feature-Policy",
+                //    "accelerometer 'none'; " +
+                //    "camera 'none'; " +
+                //    "geolocation 'self'; " +
+                //    "gyroscope 'none'; " +
+                //    "magnetometer 'none'; " +
+                //    "microphone 'none'; " +
+                //    "payment 'none';" +
+                //    "usb 'none'");
+                await next();
+            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
